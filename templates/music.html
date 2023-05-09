@@ -1,42 +1,48 @@
 {% extends "base.html" %}
 
-{% block title %}TOP 10 MUSIC EVER{% endblock %}
+{% block title %}ear destroyer{% endblock %}
 
-{% block head %}<link href="{{ url_for('static', filename='css/music.css') }}" rel="stylesheet">{% endblock %}
+{% block head %}
+<link href="{{ url_for('static', filename='css/music.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h703smFh5tGbiipX7G1FaFkTvBQg5ZePJ7Ukv" crossorigin="anonymous">
+{% endblock %}
 
 {% block content %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">SWAG BEATS LAB</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/music">Music<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/artists">Artists</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">SWAG BEATS LAB</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-3">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/music">Music<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/artists">Artists</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-    <h1>Freshest beats</h1>
+<div class="container mt-4">
+    <h1>ALL the heat</h1>
 
-    <input id="search-input" class="form-control" type="text" placeholder="Search by song title, artist, song ID or date">
+    <input id="search-input" class="form-control my-4" type="text"
+        placeholder="Search by song title, artist, song ID or date">
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Song ID</th>
                 <th>Title</th>
-                <th>Artist</th>
+                <th>Artists</th>
                 <th>Release date</th>
                 <th>Audio</th>
                 <th>Link</th>
@@ -45,35 +51,38 @@
 
         <tbody>
             {% for song in songs %}
-                <tr>
-                    <td>{{ song.song_id }}</td>
-                    <td>{{ song.title }}</td>
-                    <td>{{ song.artist }}</td>
-                    <td>{{ song.release_date }}</td>
-                    <td><audio controls><source src="{{ url_for('static', filename='audio/' + song.file_name) }}" type="audio/mpeg"></audio></td>
-                    {% if song.link != "" %}
-                        <td><a href="{{ song.link }}">Link</a></td>
-                    {% else %}
-                        <td></td>
-                    {% endif %}
-                </tr>
+            <tr>
+                <td>{{ song.song_id }}</td>
+                <td>{{ song.title }}</td>
+                <td>{{ song.artist }}</td>
+                <td>{{ song.release_date }}</td>
+                <td><audio controls>
+                        <source src="{{ url_for('static', filename='audio/' + song.file_name) }}" type="audio/mpeg">
+                    </audio></td>
+                {% if song.link != "" %}
+                <td><a href="{{ song.link }}">YouTube</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
             {% endfor %}
         </tbody>
     </table>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
-    
-    <script>
-        $(document).ready(function () {
-            $("#search-input").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("tbody tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
+
+<script>
+    $(document).ready(function () {
+        $("#search-input").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
-    </script>
+    });
+</script>
 
 {% endblock %}
