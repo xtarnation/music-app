@@ -1,4 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request
+import sqlite3
+
+import dbconnect
 
 app = Flask(__name__)
 
@@ -8,7 +11,16 @@ def index():
 
 @app.route('/music')
 def music():
-    return render_template('music.html')
+    conn = dbconnect.connect()
+    c = conn.cursor()
+
+    songs_sqliterow = c.execute('SELECT * FROM songs').fetchall()
+    songs_dict = []
+    for one in songs_sqliterow:
+        songs_dict.append(dict(one))
+
+    length = len(songs_dict)
+    return render_template('music.html', songs=songs_dict, length=length)
 
 @app.route('/artists', methods=['GET', 'POST'])
 def artists():
