@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}SWAG BEATS LAB{% endblock %}
+{% block title %}TOP 10 MUSIC EVER{% endblock %}
 
-{% block head %}<link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">{% endblock %}
+{% block head %}<link href="{{ url_for('static', filename='css/music.css') }}" rel="stylesheet">{% endblock %}
 
 {% block content %}
 
@@ -14,11 +14,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/music">Music</a>
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/music">Music<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/artists">Artists</a>
@@ -27,6 +27,6 @@
         </div>
     </nav>
 
-    <h1>beats lab under construction (stay tuned)</h1>
+    <h1>Freshest beats</h1>
 
 {% endblock %}
