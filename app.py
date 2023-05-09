@@ -41,7 +41,22 @@ def artists():
 
 @app.route('/artists/<artist>')
 def artist(artist):
-    return render_template('artistprofile.html', artist=artist)
+    conn = dbconnect.connect()
+    c = conn.cursor()
+    artist_sqliterow = c.execute('SELECT * FROM artists WHERE name=?', (artist,)).fetchone()
+    artist_songs_sqliterow = c.execute(f'SELECT * FROM songs WHERE artist LIKE "%{artist}%"').fetchall()
+    dbconnect.close(conn)
+
+    artist_details = dict(artist_sqliterow)
+
+    artist_songs = []
+    for one in artist_songs_sqliterow:
+        artist_songs.append(dict(one))
+
+    print(artist_details)
+    print(artist_songs)
+
+    return render_template('artistprofile.html', artist=artist, artist_details=artist_details, songs=artist_songs)
 
 
 if __name__ == '__main__':
