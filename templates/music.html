@@ -29,10 +29,12 @@
 
     <h1>Freshest beats</h1>
 
+    <input id="search-input" class="form-control" type="text" placeholder="Search by song title, artist, song ID or date">
+
     <table>
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Song ID</th>
                 <th>Title</th>
                 <th>Artist</th>
                 <th>Release date</th>
@@ -49,10 +51,29 @@
                     <td>{{ song.artist }}</td>
                     <td>{{ song.release_date }}</td>
                     <td><audio controls><source src="{{ url_for('static', filename='audio/' + song.file_name) }}" type="audio/mpeg"></audio></td>
-                    <td><a href="{{ song.link }}">Link</a></td>
+                    {% if song.link != "" %}
+                        <td><a href="{{ song.link }}">Link</a></td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $("#search-input").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 
 {% endblock %}
