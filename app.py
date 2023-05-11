@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect, url_for, request
-import sqlite3
 
 import dbconnect
 
@@ -52,9 +51,6 @@ def artist(artist):
     artist_songs = []
     for one in artist_songs_sqliterow:
         artist_songs.append(dict(one))
-
-    print(artist_details)
-    print(artist_songs)
 
     return render_template('artistprofile.html', artist=artist, artist_details=artist_details, songs=artist_songs)
 

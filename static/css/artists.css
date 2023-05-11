@@ -1,0 +1,21 @@
+img {
+    width: 100%;
+}
+
+.stretched-link {
+    color: white;
+}
+
+.stretched-link:hover {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.card-body {
+    background-color: rgb(118, 128, 142);
+}
+
+h1 {
+    font-size: larger;
+    font-weight: bolder;
+}

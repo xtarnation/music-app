@@ -5,16 +5,6 @@
 {% block head %}
     <link href="{{ url_for('static', filename='css/artists.css') }}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        img {
-            width: 100%;
-        }
-
-        .text {
-            text-decoration: none;
-            color: black;
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
@@ -42,13 +32,13 @@
 
     <h1 class="ml-5 mb-4 mt-4">FBI Watchlist</h1>
 
-    <div class="ml-5 mr-5 d-flex">
+    <div class="ml-5 mr-5">
 
         <div class="card-deck">
 
             {% for artist in artists %}
             <div class="card">
-                <a class="text" href="/artists/{{ artist.name }}">
+                <a href="/artists/{{ artist.name }}" class="stretched-link">
                     <img src="{{ url_for('static', filename='images/' + artist.image) }}" alt="{{ artist.name }}">
                     <div class="card-body">
                         <h5 class="card-title text-center">{{ artist.name }}</h5>
@@ -59,6 +49,5 @@
 
         </div>
     </div>
-
 
 {% endblock %}

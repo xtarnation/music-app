@@ -6,29 +6,52 @@
 
 {% block content %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">SWAG BEATS LAB</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/music">Music</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/artists">Artists</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">SWAG BEATS LAB</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-3">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/music">Music</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/artists">Artists</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-    <h1>{{ artist }}</h1>
+<h1>{{ artist }}</h1>
 
-    
+<p>{{ artist_details.description }}</p>
+
+<img src="{{ url_for('static', filename='images/' + artist + '.jpg') }}" alt="artist image">
+
+<div>
+    <li><a href="https://www.youtube.com/{{ artist_details.youtube }}">YouTube</a></li>
+    <li><a href="https://www.instagram.com/{{ artist_details.instagram }}/">Instagram</a></li>
+</div>
+
+<div>
+    <h2>Music</h2>
+    <ol>
+        {% for song in songs %}
+        <li>
+            <p>{{ song.title }}</p>
+            <p>{{ song.artist }}</p>
+            <p>{{ song.release_date }}</p>
+            <audio controls>
+                <source src="{{ url_for('static', filename='audio/' + song.file_name) }}" type="audio/mpeg">
+            </audio>
+        </li>
+        {% endfor %}
+    </ol>
+</div>
 
 {% endblock %}
