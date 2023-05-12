@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
+import datetime
 
 import dbconnect
 
@@ -20,6 +21,8 @@ def music():
     songs_dict = []
     for one in songs_sqliterow:
         songs_dict.append(dict(one))
+    
+    songs_dict.sort(key=lambda x: datetime.datetime.strptime(x['release_date'], '%d/%m/%Y'), reverse=True)
 
     return render_template('music.html', songs=songs_dict)
 

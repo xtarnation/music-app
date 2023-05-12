@@ -51,8 +51,9 @@
 
         <tbody>
             {% for song in songs %}
+            {% set x = loop.index %}
             <tr>
-                <td>{{ song.song_id }}</td>
+                <td>{{ x }}.</td>
                 <td>{{ song.title }}</td>
                 <td>{{ song.artist }}</td>
                 <td>{{ song.release_date }}</td>

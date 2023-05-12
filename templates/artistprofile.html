@@ -2,7 +2,14 @@
 
 {% block title %}{{ artist }}'s profile{% endblock %}
 
-{% block head %}<link href="{{ url_for('static', filename='css/artistprofile.css') }}" rel="stylesheet">{% endblock %}
+{% block head %}<link href="{{ url_for('static', filename='css/artistprofile.css') }}" rel="stylesheet">
+<style>
+    img {
+        width: 300px;
+        height: 400px;
+        margin: 20px;
+    }
+</style>{% endblock %}
 
 {% block content %}
 
