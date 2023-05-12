@@ -55,6 +55,8 @@ def artist(artist):
     for one in artist_songs_sqliterow:
         artist_songs.append(dict(one))
 
+    artist_songs.sort(key=lambda x: datetime.datetime.strptime(x['release_date'], '%d/%m/%Y'), reverse=True)
+
     return render_template('artistprofile.html', artist=artist, artist_details=artist_details, songs=artist_songs)
 
 

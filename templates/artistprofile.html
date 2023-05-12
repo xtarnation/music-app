@@ -7,8 +7,12 @@
     img {
         width: 300px;
         height: 400px;
-        margin: 20px;
     }
+
+    #music-details {
+    height: 600px;
+    overflow-y: scroll;
+}
 </style>{% endblock %}
 
 {% block content %}
@@ -34,31 +38,55 @@
     </div>
 </nav>
 
-<h1>{{ artist }}</h1>
-
-<p>{{ artist_details.description }}</p>
-
-<img src="{{ url_for('static', filename='images/' + artist + '.jpg') }}" alt="artist image">
-
-<div>
-    <li><a href="https://www.youtube.com/{{ artist_details.youtube }}">YouTube</a></li>
-    <li><a href="https://www.instagram.com/{{ artist_details.instagram }}/">Instagram</a></li>
-</div>
-
-<div>
-    <h2>Music</h2>
-    <ol>
-        {% for song in songs %}
-        <li>
-            <p>{{ song.title }}</p>
-            <p>{{ song.artist }}</p>
-            <p>{{ song.release_date }}</p>
-            <audio controls>
-                <source src="{{ url_for('static', filename='audio/' + song.file_name) }}" type="audio/mpeg">
-            </audio>
-        </li>
-        {% endfor %}
-    </ol>
+<div class="row row-cols-2">
+    <div class="col-3 mt-3 ml-4" id="artist-details">
+        <h1>{{ artist }}</h1>
+        <p>{{ artist_details.description }}</p>
+        <img src="{{ url_for('static', filename='images/' + artist + '.jpg') }}" alt="artist image">
+        
+        <div>
+            <li><a href="https://www.youtube.com/{{ artist_details.youtube }}">YouTube</a></li>
+            <li><a href="https://www.instagram.com/{{ artist_details.instagram }}/">Instagram</a></li>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <h2 class="mb-4">Music</h2>
+        <div id="music-details">
+            <table class="table">
+                <thead id="thead">
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Artists</th>
+                        <th>Release date</th>
+                        <th>Audio</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    {% for song in songs %}
+                    {% set x = loop.index %}
+                    <tr>
+                        <td>{{ x }}.</td>
+                        <td>{{ song.title }}</td>
+                        <td>{{ song.artist }}</td>
+                        <td>{{ song.release_date }}</td>
+                        <td><audio controls>
+                                <source src="{{ url_for('static', filename='audio/' + song.file_name) }}" type="audio/mpeg">
+                            </audio></td>
+                        {% if song.link != "" %}
+                        <td><a href="{{ song.link }}">YouTube</a></td>
+                        {% else %}
+                        <td></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
