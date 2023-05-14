@@ -1,0 +1,27 @@
+
+img {
+    width: 300px;
+    height: 400px;
+}
+
+#music-details {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+h1 {
+    word-wrap: break-word;
+}
+
+#artists {
+    word-wrap: overflow;
+}
+
+#description {
+    word-wrap: break-word;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 15%;
+}
